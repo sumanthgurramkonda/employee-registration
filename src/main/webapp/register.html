@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Insert title here</title>
+		 <style>
+	        .button{
+	            height: 50px;
+	            width: 80px;
+	        }
+	    </style>
+	</head>
+	<body>
+	   <div align="center">
+	   <h1>Employee Management Portal</h1>
+	     <table>
+	          <tr>
+	             <td>
+		             <a href="register"><button id="register" class="button">Register</button></a>
+	             </td>
+	            
+	             <td>
+		                <a href="view"> <button id="view" class="button">View</button></a> 
+	             </td>
+	          </tr>
+	     </table>
+	      <form action="registerEmployee" method="post" id="form">
+                <table border="1" style="border-radius:5px;">
+             <tr>
+                    <td>
+                        <label >Firstname</label>
+                    </td>
+                    <td>
+                        <input type="text" id="fname" name="firstname" placeholder="ex:Robert" size="30" required>
+                    </td>
+             </tr>
+             <tr>   
+                    <td>
+                        <label >MiddleName</label>
+                    </td>
+                    <td>
+                        <input type="text" id="mname" name="middlename" placeholder="ex: downy" size="30" >
+                    </td>
+              </tr> 
+              <tr> 
+                    <td>
+                        <label >LastName</label>
+                    </td>
+                    <td>
+                        <input type="text" id="lname" name="lastname" placeholder="ex:junior" size="30" required>
+                    </td>
+             </tr>
+                <tr>
+                    <td>
+                        <label >DOB</label>
+                    </td>
+                    <td>
+                        <input type="date" id="dob" name="dob"  required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label >Country</label>
+                    </td>
+                    <td>
+                        <select id="country" name="country" required>
+                            <option value="select" >--select--</option>
+                            <option id="india" name="india" value="india">India</option>
+                            <option id="US" name="US" value="US">US</option>
+                            <option id="UK" name="UK" value="UK">UK</option>
+                            <option id="other" name="other" value="other">Other</option>
+                        </select>
+                        <select id="state"name="state" required>
+                            <option id="temp1" ></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label >Address</label>
+                    </td>
+                    <td>
+                        <input type="text" id="address" name="address" size="30" required>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <label>Experience</label>
+                    </td>
+                    <td>
+                        <label>Yes</label>
+                        <input  type="radio" value="yes" name="isExperienced" id="isExperienced" />
+                        <label>No</label>
+                        <input  type="radio"  name="isExperienced" id="isExperienced" />
+                    </td>
+                </tr>
+                    <tr id="exp">
+                        <td>
+                            <label>Experience</label>
+                            <!-- <div id ="exp"></div> -->
+                        </td>
+                        <td>
+                            <input  type="number" name="experience" id="experience"/>
+                        </td>
+                    </tr>
+                <tr>
+                    <td>
+                        <label>Education</label>
+                    </td>
+                    <td>
+                        <select name="education">
+                            <option value="">--select--</option>
+                            <option value="EEE">EEE</option>
+                            <option value="MEC">MEC</option>
+                            <option value="ECE">ECE</option>
+                            <option value="CSE">ECE</option>
+                            <option value="IT">IT</option>
+                        </select>
+                    </td>
+                </tr>
+
+                </table>
+                <input type="submit">
+            </form>
+	   </div>
+	  
+	    <script type="text/javascript">
+
+	    var fname = document.getElementById("fname");
+	    var mname = document.getElementById("mname");
+	    var lname = document.getElementById("lname");
+	
+	    function validateName(e){
+	         var val = e.value;
+	             for(index=0;index<val.length;index++){
+	                 if(val[index]>='a' && val[index]<='z' || val[index]>='A' && val[index]<='Z' ){
+	                         e.style.color="black";
+	                     }
+	                     else {
+	                         e.style.color="red";
+	                         break;
+	                     }
+	             };
+	    }
+	
+	    fname.oninput=()=>{
+	         validateName(fname);
+	    }
+	    mname.oninput=()=>{
+	         validateName(mname);
+	    }
+	    lname.oninput=()=>{
+	         validateName(lname);
+	    }
+	
+	    var dob = document.getElementById("dob");
+	    var year=0;
+	    dob.oninput=()=>{
+	       year = new Date().getFullYear()-new Date(dob.value).getFullYear();
+	    }
+	    
+	    var experience= document.getElementById("experience");
+	    experience.oninput=()=>{
+	         console.log(experience);
+	         console.log(experience.value);
+	         if(experience.value<0 ){
+	             experience.style.color="red";
+	         }
+	    }
+	
+	    var isExperienced = document.querySelectorAll("[id=isExperienced]");
+	    var countryElement = document.getElementById("country");
+	    var stateOptins = document.createElement("option");
+	
+	    var states = {
+	     "india" : ["",,"AP","TS","TN","MP","UP"],
+	     "US"    : ["","California","Texos",],
+	     "UK"    : ["","Bristol","CornWall"],
+	     "other" : [""]
+	    };
+	    
+	    var stateElement = document.getElementById("state");
+	    stateElement.name="state";
+	    countryElement.addEventListener("click",()=>{
+	             var option;
+	             if(countryElement.value==="other")stateElement.required=false;
+                else stateElement.required=true;
+	             states[countryElement.value].forEach((val,index)=>{
+	             option += `<option val=${val} id=${val} name="state" >${val}</option>`
+	             });
+	              stateElement.innerHTML=option;
+	    });
+	    
+	    for( i=0;i<isExperienced.length;i++){
+	         var experiencetag = document.getElementById("experience");
+		        experiencetag.required;
+	         var experience = document.getElementById("exp");
+	         console.log(experience);
+	         experience.style.visibility="collapse";
+	
+	         if(isExperienced[i].value==="yes"){
+	                     console.log(experience);
+	                     isExperienced[i].addEventListener("click",()=>{
+	                         experience.style.visibility="visible";
+	                 });
+	         }
+	         else {
+	             isExperienced[i].addEventListener("click",()=>{
+	                         experience.style.visibility="collapse";
+	                 });
+	         }
+	    }
+	    document.getElementById("form").onsubmit = ()=>{
+	         if(!validate(fname)) return false;
+	         if(!validate(mname)) return false;
+	         if(!validate(lname)) return false;
+	         if(!validate(experience)) return false;
+	        return true;;
+	   }
+	   function validate(tag){
+	     if(tag.style.color==="red"){
+	           alert("Enter valid details");
+	           return false;
+	     }
+	     return true;
+	   }
+ 
+ </script>
+	
+	</body>
+</html>
+
+
+

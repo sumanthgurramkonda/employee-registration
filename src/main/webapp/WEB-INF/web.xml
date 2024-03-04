@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+    id="WebApp_ID" version="3.1">
+  <display-name>Archetype Created Web Application</display-name>
+  
+   <context-param>
+       <param-name>url</param-name>
+       <param-value>jdbc:mysql://localhost:3306/Employee</param-value>
+  </context-param>
+  <context-param>
+       <param-name>username</param-name>
+       <param-value>root</param-value>
+  </context-param>
+  <context-param>
+       <param-name>password</param-name>
+       <param-value>root</param-value>
+  </context-param>
+  
+   <filter>
+  	<filter-name>SecurityFilter</filter-name>
+  	<filter-class>com.java.security.SecurityFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>SecurityFilter</filter-name>
+  	<url-pattern>/servlet</url-pattern>
+  </filter-mapping>
+  
+  <servlet>
+  	<servlet-name>SecurityServlet</servlet-name>
+  	<servlet-class>com.java.security.SecurityServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>SecurityServlet</servlet-name>
+  	<url-pattern>/servlet</url-pattern>
+  </servlet-mapping>
+   <servlet-mapping>
+  	<servlet-name>SecurityServlet</servlet-name>
+  	<url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SecurityServlet</servlet-name>
+  	<url-pattern>/view</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SecurityServlet</servlet-name>
+  	<url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>SecurityServlet</servlet-name>
+  	<url-pattern>/registerEmployee</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>servletController</servlet-name>
+  	<servlet-class>com.java.employee.controller.ServletController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>servletController</servlet-name>
+  	<url-pattern>/servletcontroller</url-pattern>
+  </servlet-mapping>
+  
+
+  
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
+</web-app>
